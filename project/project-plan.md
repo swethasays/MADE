@@ -26,7 +26,7 @@ The datasets contains India District-wise agriculture crop area and production 1
 
 - **Metadata URL:** https://data.gov.in
 
-- **Data URL:** https://www.kaggle.com/datasets/asishpandey/crop-production-in-india?select=temperature.csv
+- **Data URL:** https://www.kaggle.com/datasets/asishpandey/crop-production-in-india?select=final_temperature.csv
 
 - **Data Type:** CSV
 
