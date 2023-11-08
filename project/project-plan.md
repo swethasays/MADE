@@ -22,4 +22,8 @@ This project aims to analyze the development of cow milk prices and quantities i
 
 This dataset encompasses detailed records of cow milk prices and quantities in Germany, covering a span from January 2012 to December 2022. It includes data on different types of milk prices such as farm gate prices with standardized fat and protein content, and prices free at dairy, for both conventional and organic milk production.
 
+## Work Packages
+
+1. Data Acquisition - Gathering all necessary data for the project. Issue: https://github.com/swethasays/MADE/issues/1#issue-1983594299
+
 
