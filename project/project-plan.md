@@ -1,35 +1,43 @@
 # Project Plan
 
 ## Title
-**Cow Milk Price Analysis**
+**Crop Production in India**
 
 ## Description
-This project aims to analyze the development of cow milk prices and quantities in Germany using the provided dataset. The goal is to uncover trends, compare conventional and organic milk production, and understand regional price variations.
+This project aims to analyze the correlation between agricultural crops production based on weather condition in India using the provided dataset. The goal is to identify the most crucial weather parameters affecting crop production, explore the impact of climate change on crop production, and develop actionable insights for farmers and policymakers.
 
 ## Objectives
-- To conduct a comprehensive analysis of cow milk prices and quantities over the past decade.
-- To compare price trends between conventional and organic milk.
-- To investigate regional variations in milk production and pricing.
+- A list of the most crucial weather parameters affecting crop production
+- A quantitative assessment of the impact of climate change on crop production
+- Actionable insights for farmers and policymakers to improve crop yields and adapt to climate change
 
-## Datasource1: Cow Milk Prices and Quantities in Germany
 
-- **Metadata URL:** https://www.govdata.de/web/guest/suchen/-/details/entwicklung-der-kuhmilchpreise-und-mengen-in-deutschland](https://www.govdata.de/ckan/dataset/entwicklung-der-kuhmilchpreise-und-mengen-in-deutschland.rdf)
+## Datasource1: India Agriculture Crop Production
 
-- **Data URL:** https://open-data.ble.de/dataset/cf985b36-21f7-431f-a929-41f964a93fb1/resource/f1faa57c-0acf-495b-9574-6866dbd8948a/download/mvo_milch_monat.xlsx
+- **Metadata URL:** https://aps.dac.gov.in
+
+- **Data URL:** https://www.kaggle.com/datasets/pyatakov/india-agriculture-crop-production
 
 - **Data Type:** CSV
 
+The datasets contains India District-wise agriculture crop area and production 1997-2020.
 
-This dataset encompasses detailed records of cow milk prices and quantities in Germany, covering a span from January 2012 to December 2022. It includes data on different types of milk prices such as farm gate prices with standardized fat and protein content, and prices free at dairy, for both conventional and organic milk production.
+## Datasource2: Temperature 
+
+- **Metadata URL:** https://data.gov.in
+
+- **Data URL:** https://www.kaggle.com/datasets/asishpandey/crop-production-in-india?select=temperature.csv
+
+- **Data Type:** CSV
+
+This dataset contain weather temperature values of different areas in india for every month.
+
 
 ## Work Packages
 
-1. Data Preparation - Gathering all necessary data for the project. Issue: https://github.com/swethasays/MADE/issues/1#issue-1983594299
-2. Data Cleaning - Ensuring the quality of the data by cleaning any inaccuracies or inconsistencies. Issue: https://github.com/swethasays/MADE/issues/2#issue-1983619701
-3. Exploratory Data Analysis - Initial analysis to summarize main characteristics and find patterns. Issue: https://github.com/swethasays/MADE/issues/3#issue-1983623936
-4. Data Engineering Pipeline - Issue: https://github.com/swethasays/MADE/issues/4#issue-1983625991
-5. Report Writing - Compiling the findings into a comprehensive report. Issue: https://github.com/swethasays/MADE/issues/5#issue-1983628740
-6. Review and Submission - Final review of the work and submission of the report. Issue: https://github.com/swethasays/MADE/issues/6#issue-1983629896
+1. Data Engineering Pipeline - Issue: https://github.com/swethasays/MADE/issues/4#issue-1983625991
+2. Report Writing - Compiling the findings into a comprehensive report. Issue: https://github.com/swethasays/MADE/issues/5#issue-1983628740
+3. Review and Submission - Final review of the work and submission of the report. Issue: https://github.com/swethasays/MADE/issues/6#issue-1983629896
 
 
 
