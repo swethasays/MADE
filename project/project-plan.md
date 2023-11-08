@@ -24,6 +24,12 @@ This dataset encompasses detailed records of cow milk prices and quantities in G
 
 ## Work Packages
 
-1. Data Acquisition - Gathering all necessary data for the project. Issue: https://github.com/swethasays/MADE/issues/1#issue-1983594299
+1. Data Preparation - Gathering all necessary data for the project. Issue: https://github.com/swethasays/MADE/issues/1#issue-1983594299
+2. Data Cleaning - Ensuring the quality of the data by cleaning any inaccuracies or inconsistencies. Issue: https://github.com/swethasays/MADE/issues/2#issue-1983619701
+3. Exploratory Data Analysis - Initial analysis to summarize main characteristics and find patterns. Issue: https://github.com/swethasays/MADE/issues/3#issue-1983623936
+4. Data Engineering Pipeline - Issue: https://github.com/swethasays/MADE/issues/4#issue-1983625991
+5. Report Writing - Compiling the findings into a comprehensive report. Issue: https://github.com/swethasays/MADE/issues/5#issue-1983628740
+6. Review and Submission - Final review of the work and submission of the report. Issue: https://github.com/swethasays/MADE/issues/6#issue-1983629896
+
 
 
