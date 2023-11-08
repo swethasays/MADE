@@ -1,7 +1,7 @@
 # Project Plan
 
 ## Title
-**Project Plan for Cow Milk Price Analysis**
+**Cow Milk Price Analysis**
 
 ## Description
 This project aims to analyze the development of cow milk prices and quantities in Germany using the provided dataset. The goal is to uncover trends, compare conventional and organic milk production, and understand regional price variations.
