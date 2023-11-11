@@ -5,22 +5,22 @@ from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Float, S
 data_url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv"
 
 
-df = pd.read_csv(data_url, on_bad_lines='skip')
+df = pd.read_csv(data_url, delimiter=';', on_bad_lines='skip')
 
 column_types = {
     'column_1': Integer(),
-    'column_2': Text(),
-    'column_3': Text(),
-    'column_4': Text(),
-    'column_5': Integer(),
-    'column_6': Text(),
+    'column_2': String(),
+    'column_3': String(),
+    'column_4': String(),
+    'column_5': String(),  
+    'column_6': String(),  
     'column_7': Float(),
     'column_8': Float(),
     'column_9': Integer(),
     'column_10': Float(),
-    'column_11': Text(),
-    'column_12': Text(),
-    'geo_punkt': Text()
+    'column_11': String(),  
+    'column_12': String(),  
+    'geo_punkt': String()   
 }
 
 
