@@ -13,9 +13,9 @@ This project aims to examine the connectivity and operations of German airports 
 
 ## Datasource1: Airports in Germany
 
-- **Metadata URL:** https://data.humdata.org/dataset/ourairports-deu
+- **Metadata URL:** https://data.world/ourairports/7f64d31f-365d-460d-bb0c-04a19929bbff
 
-- **Data URL:** https://data.world/ourairports/7f64d31f-365d-460d-bb0c-04a19929bbff
+- **Data URL:** https://query.data.world/s/sjwvpaxrfji5s5mnwexv4zisexgui7?dws=00000
 
 - **Data Type:** CSV
 
@@ -23,13 +23,16 @@ This dataset contains detailed information about airports in Germany, such as lo
 
 ## Datasource2: Global Airports, Airlines, and Routes 
 
-- **Metadata URL:** https://openflights.org
+- **Metadata URL:** https://data.world/tylerudite/airports-airlines-and-routes
 
-- **Data URL:** https://data.world/tylerudite/airports-airlines-and-routes
+- **Data URL 1:** https://query.data.world/s/rucpufmwf7l5dgp5uxvhuniplfurxl?dws=00000
+- **Data URL 2:** https://query.data.world/s/pc6c3caazxld7lwjvbcnci6eziol5q?dws=00000
+- **Data URL 3:** https://query.data.world/s/rdfvb4syvuuwi3iwv7r3eyphvo7bsk?dws=00000
+- **Data URL 4:** https://query.data.world/s/ehlhxizkunqbenzmuhrgymdfn3shh4?dws=00000
 
 - **Data Type:** CSV
 
-This dataset contains three files and provides information on various global airports, airlines, and their routes, offering insights into international air traffic connectivity. 
+This dataset contains three files and provides information on various global airports, airlines,airplanes and their routes, offering insights into international air traffic connectivity. 
 
 
 ## Work Packages
