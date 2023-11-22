@@ -19,7 +19,7 @@ This project aims to examine the connectivity and operations of German airports 
 
 - **Data Type:** CSV
 
-This dataset likely contains detailed information about airports in Germany, such as location, size, type, and other relevant details.
+This dataset contains detailed information about airports in Germany, such as location, size, type, and other relevant details.
 
 ## Datasource2: Global Airports, Airlines, and Routes 
 
@@ -29,7 +29,7 @@ This dataset likely contains detailed information about airports in Germany, suc
 
 - **Data Type:** CSV
 
-This dataset contains comprehensive information on various global airports, airlines, and their routes, offering insights into international air traffic connectivity.
+This dataset contains three files and provides information on various global airports, airlines, and their routes, offering insights into international air traffic connectivity. 
 
 
 ## Work Packages
