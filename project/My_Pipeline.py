@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 datasets = {
-    "Airports Germany": "https://query.data.world/s/xd45i2us5ic4eqikbfgsc5hexfvurk?dws=00000",
+    "Airports Germany": "https://query.data.world/s/sjwvpaxrfji5s5mnwexv4zisexgui7?dws=00000",
     "Global Airlines": "https://query.data.world/s/rucpufmwf7l5dgp5uxvhuniplfurxl?dws=00000",
     "Global Airplanes": "https://query.data.world/s/pc6c3caazxld7lwjvbcnci6eziol5q?dws=00000",
     "Global Airports": "https://query.data.world/s/rdfvb4syvuuwi3iwv7r3eyphvo7bsk?dws=00000",
