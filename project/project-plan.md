@@ -1,36 +1,35 @@
 # Project Plan
 
 ## Title
-**Crop Production in India**
+**German Airports in the Global Air Network**
 
 ## Description
-This project aims to analyze the correlation between agricultural crops production based on weather condition in India using the provided dataset. The goal is to identify the most crucial weather parameters affecting crop production, explore the impact of climate change on crop production, and develop actionable insights for farmers and policymakers.
+This project aims to examine the connectivity and operations of German airports within the global air traffic network. By analyzing datasets of German airports and global airline routes, the project seeks to understand Germany's position and influence in international aviation, the key airlines and routes associated with German airports, and the overall network structure of air traffic as it relates to Germany.
 
 ## Objectives
-- A list of the most crucial weather parameters affecting crop production
-- A quantitative assessment of the impact of climate change on crop production
-- Actionable insights for farmers and policymakers to improve crop yields and adapt to climate change
+- Comparative analysis of German airports within the global aviation network.
+- Identification of key airlines and routes operating in German airports.
+- Network analysis to map the connectivity of German airports with global destinations.
 
+## Datasource1: Airports in Germany
 
-## Datasource1: India Agriculture Crop Production
+- **Metadata URL:** https://data.humdata.org/dataset/ourairports-deu
 
-- **Metadata URL:** https://aps.dac.gov.in
-
-- **Data URL:** https://www.kaggle.com/datasets/pyatakov/india-agriculture-crop-production
-
-- **Data Type:** CSV
-
-The datasets contains India District-wise agriculture crop area and production 1997-2020.
-
-## Datasource2: Temperature 
-
-- **Metadata URL:** https://data.gov.in
-
-- **Data URL:** https://www.kaggle.com/datasets/asishpandey/crop-production-in-india?select=final_temperature.csv
+- **Data URL:** https://data.world/ourairports/7f64d31f-365d-460d-bb0c-04a19929bbff
 
 - **Data Type:** CSV
 
-This dataset contain weather temperature values of different areas in india for every month.
+This dataset likely contains detailed information about airports in Germany, such as location, size, type, and other relevant details.
+
+## Datasource2: Global Airports, Airlines, and Routes 
+
+- **Metadata URL:** https://openflights.org
+
+- **Data URL:** https://data.world/tylerudite/airports-airlines-and-routes
+
+- **Data Type:** CSV
+
+This dataset contains comprehensive information on various global airports, airlines, and their routes, offering insights into international air traffic connectivity.
 
 
 ## Work Packages
