@@ -13,19 +13,19 @@ pipeline TrainStopPipeline {
         delimiter: ";";
     }
 
-    // Block to interpret the CSV as a table
+    // Block to interpret the CSV as a table with data types
     block TrainStopTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "EVA_NR" oftype text,  
+            "EVA_NR" oftype text,
             "DS100" oftype text,
-            "IFOPT" oftype text,
+            "IFOPT" oftype text,  
             "NAME" oftype text,
-            "Verkehr" oftype text,
-            "Laenge" oftype decimal,  
-            "Breite" oftype decimal,  
+            "Verkehr" oftype text,  
+            "Laenge" oftype decimal,
+            "Breite" oftype decimal,
             "Betreiber_Name" oftype text,
-            "Betreiber_Nr" oftype text  
+            "Betreiber_Nr" oftype text
         ];
     }
 
