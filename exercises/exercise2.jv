@@ -1,23 +1,26 @@
 pipeline TrainStopPipeline {
 
+    // Block to extract CSV file from the URL
     block CsvHttpExtractor oftype HttpExtractor {
         url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
     }
 
+    // Block to interpret the binary file as a text file
     block CsvTextFileInterpreter oftype TextFileInterpreter { }
 
+    // Block to interpret the text file as a CSV
     block CsvFileInterpreter oftype CSVInterpreter {
         delimiter: ";";
+        enclosing: '"';
     }
 
+    // Block to interpret the CSV as a table with correct data types
     block TrainStopTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
             "EVA_NR" oftype text,
             "DS100" oftype text,
-            "IFOPT" oftype text with constraints {
-                IFOPTFormat;
-            },
+            "IFOPT" oftype text,  
             "NAME" oftype text,
             "Verkehr" oftype text,  
             "Laenge" oftype decimal,
@@ -27,18 +30,16 @@ pipeline TrainStopPipeline {
         ];
     }
 
+    // Block to load the data into an SQLite database
     block TrainStopLoader oftype SQLiteLoader {
         table: "trainstops";
         file: "./trainstops.sqlite";
     }
 
+    // Defining the pipeline flow
     CsvHttpExtractor 
         -> CsvTextFileInterpreter 
         -> CsvFileInterpreter 
         -> TrainStopTableInterpreter 
         -> TrainStopLoader;
-}
-
-constraint IFOPTFormat oftype RegexConstraint {
-    regex: "^[a-zA-Z]{2}:\d+:\d+(?::\d+)?$";
 }
