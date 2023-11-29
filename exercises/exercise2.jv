@@ -43,8 +43,7 @@ block TrainStopTableInterpreter oftype TableInterpreter {
         "Laenge" oftype decimal,
         "Breite" oftype decimal,
         "Betreiber_Name" oftype text,
-        "Betreiber_Nr" oftype integer,
-        "Status" oftype text
+        "Betreiber_Nr" oftype integer
 
     ];
 }
