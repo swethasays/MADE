@@ -35,7 +35,7 @@ constraint VerkehrValueConstraint on text:
 block TrainStopTableInterpreter oftype TableInterpreter {
     header: true;
     columns: [
-        "EVA_NR" oftype text,
+        "EVA_NR" oftype integer,
         "DS100" oftype text,
         "IFOPT" oftype IFOPTFormat,  
         "NAME" oftype text,
@@ -43,7 +43,7 @@ block TrainStopTableInterpreter oftype TableInterpreter {
         "Laenge" oftype decimal,
         "Breite" oftype decimal,
         "Betreiber_Name" oftype text,
-        "Betreiber_Nr" oftype text
+        "Betreiber_Nr" oftype integer
     ];
 }
 
