@@ -92,14 +92,17 @@ def load_data(data, dataset_name, db_file_path):
         data.to_sql(dataset_name, connection, if_exists='replace', index=False)
 
 # Main loop to process each dataset
-for dataset_name, url in datasets.items():
-    try:
-        raw_data = extract_data(url)
-        processed_data = transform_data(raw_data, dataset_name)
-        db_path = f"../data/{dataset_name}.sqlite"
-        load_data(processed_data, dataset_name, db_path)
-        print(f"Data for {dataset_name} has been processed and stored in {db_path}")
-    except Exception as e:
-        print(f"Error processing {dataset_name}: {e}")
+def run_etl_pipeline():
+    for dataset_name, url in datasets.items():
+        try:
+            raw_data = extract_data(url)
+            processed_data = transform_data(raw_data, dataset_name)
+            db_path = f"../data/{dataset_name}.sqlite"
+            load_data(processed_data, dataset_name, db_path)
+            print(f"Data for {dataset_name} has been processed and stored in {db_path}")
+        except Exception as e:
+            print(f"Error processing {dataset_name}: {e}")
 
-print("ETL process completed for all datasets.")
+if __name__ == "__main__":
+    run_etl_pipeline()
+    print("ETL process completed for all datasets.")
