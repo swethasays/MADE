@@ -1,2 +1,2 @@
 #!/bin/bash
-pytest project/automated_tests.py
+pytest /project/automated_tests.py
