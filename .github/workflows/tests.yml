@@ -7,6 +7,8 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+
+    
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event." 
 
@@ -14,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3 
       
-      # Install dependencies (if any)
+      # Install dependencies (if need)
       - name: Install dependencies
         run: |
           pip install -r requirements.txt 
