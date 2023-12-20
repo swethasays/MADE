@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import os
-from MyPipeline import (transform_airports_germany, transform_airlines,
+from My_Pipeline import (transform_airports_germany, transform_airlines,
                  transform_airplanes, transform_global_airports,
                  transform_routes, run_etl_pipeline,datasets)
 
