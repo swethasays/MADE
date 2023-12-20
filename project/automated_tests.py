@@ -47,8 +47,7 @@ def file4_airports_data():
         'ICAO': ['KLAX', 'EGLL'],
         'Latitude': ['33.9425', '51.4775'],
         'Longitude': ['-118.4081', '-0.4614'],
-        'Altitude': ['125', '83'],
-        'Type': ['Type1', 'Type2'] 
+        'Altitude': ['125', '83']
     })
   
 @pytest.fixture
