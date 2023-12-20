@@ -47,9 +47,10 @@ def file4_airports_data():
         'ICAO': ['KLAX', 'EGLL'],
         'Latitude': ['33.9425', '51.4775'],
         'Longitude': ['-118.4081', '-0.4614'],
-        'Altitude': ['125', '83']
+        'Altitude': ['125', '83'],
+        'Type': ['Type1', 'Type2']  # Add this line
     })
-
+  
 @pytest.fixture
 def file5_routes_data():
     return pd.DataFrame({
