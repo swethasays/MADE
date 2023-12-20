@@ -48,7 +48,7 @@ def file4_airports_data():
         'Latitude': ['33.9425', '51.4775'],
         'Longitude': ['-118.4081', '-0.4614'],
         'Altitude': ['125', '83'],
-        'Type': ['Type1', 'Type2']  # Add this line
+        'Type': ['Type1', 'Type2'] 
     })
   
 @pytest.fixture
