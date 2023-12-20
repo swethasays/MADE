@@ -1,6 +1,4 @@
 name: GitHub Actions for testing the workflow
-run-name: ${{ github.actor }} is testing the workflow
-
 on:
   push:
     branches:
@@ -12,17 +10,18 @@ jobs:
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event." 
 
-      #Checkout the branch
+      # Checkout the branch
       - name: Checkout
         uses: actions/checkout@v3 
       
-      # Build Stage 
-      - name: pip install requirements
+      # Install dependencies (if any)
+      - name: Install dependencies
         run: |
-            pip install -r requirements.txt 
+          pip install -r requirements.txt 
 
       # Test Stage
-      - working-directory: Run Tests
-        run: | 
-          chmod +x ./tests.sh
-          ./tests.sh
+      - name: Run Tests
+        run: |
+          chmod +x ./project/tests.sh
+          ./project/tests.sh
+
