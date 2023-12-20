@@ -22,7 +22,7 @@ jobs:
             pip install -r requirements.txt 
 
       # Test Stage
-      - name: Run Tests
+      - working-directory: ./project
         run: | 
-          chmod +x ./project/tests.sh
-          ./project/tests.sh
+          chmod +x tests.sh
+          ./tests.sh
