@@ -50,19 +50,17 @@ def transform_airplanes(data):
 
 def transform_global_airports(data):
     transformed = data.copy()
-    if 'Type' in transformed.columns:
-        transformed['Type'] = transformed['Type'].str.strip()
     transformed['Name'] = transformed['Name'].str.strip()
     transformed['City'] = transformed['City'].str.strip()
     transformed['Country'] = transformed['Country'].str.strip()
-    transformed['Type'] = transformed['Type'].str.strip()
-    transformed['Source'] = transformed['Source'].str.strip()
     transformed['IATA'] = transformed['IATA'].replace({'\\N': None})
     transformed['ICAO'] = transformed['ICAO'].replace({'\\N': None})
     transformed['Latitude'] = pd.to_numeric(transformed['Latitude'], errors='coerce')
     transformed['Longitude'] = pd.to_numeric(transformed['Longitude'], errors='coerce')
     transformed['Altitude'] = pd.to_numeric(transformed['Altitude'], errors='coerce')
+
     return transformed
+
 
 def transform_routes(data):
     transformed = data.copy()
