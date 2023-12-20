@@ -2,9 +2,10 @@ import pytest
 import pandas as pd
 import os
 from My_Pipeline import (transform_airports_germany, transform_airlines,
-                 transform_airplanes, transform_global_airports,
-                 transform_routes, run_etl_pipeline,datasets)
+                         transform_airplanes, transform_global_airports,
+                         transform_routes, run_etl_pipeline, datasets)
 
+@pytest.fixture
 def file1_airports_germany_data():
     return pd.DataFrame({
         'latitude_deg': ['52.5597', 'invalid_data'],
@@ -16,7 +17,7 @@ def file1_airports_germany_data():
         'iata_code': ['TXL', None]
     })
 
-
+@pytest.fixture
 def file2_airlines_data():
     return pd.DataFrame({
         'Name': ['Lufthansa', 'British Airways'],
@@ -28,7 +29,7 @@ def file2_airlines_data():
         'Active': ['Y', 'N']
     })
 
-
+@pytest.fixture
 def file3_airplanes_data():
     return pd.DataFrame({
         'Name': ['Boeing 747', 'Airbus A320'],
@@ -36,7 +37,7 @@ def file3_airplanes_data():
         'ICAO code': ['B744', 'A320']
     })
 
-
+@pytest.fixture
 def file4_airports_data():
     return pd.DataFrame({
         'Name': ['Los Angeles International', 'Heathrow'],
@@ -49,7 +50,7 @@ def file4_airports_data():
         'Altitude': ['125', '83']
     })
 
-
+@pytest.fixture
 def file5_routes_data():
     return pd.DataFrame({
         'Airline': ['AA', 'BA'],
@@ -60,7 +61,7 @@ def file5_routes_data():
         'Equipment': ['Boeing 747', 'Airbus A320']
     })
 
-# Tests for the transform functions
+# Tests
 def test_transform_airports_germany(file1_airports_germany_data):
     result = transform_airports_germany(file1_airports_germany_data)
     assert result['latitude_deg'].dtype == float, "Latitude column is not of type float"
@@ -94,11 +95,15 @@ def test_transform_routes(file5_routes_data):
     assert result['Stops'].dtype == int, "Stops column is not of type int"
     assert result['Equipment'].str.contains('Boeing').any(), "Boeing not found in Equipment column"
 
-# System-level test to check the ETL pipeline execution
+# System-level test
 def test_etl_pipeline_execution():
     # Ensures output files do not pre-exist
+    data_dir = "../data"
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+
     for dataset_name in datasets.keys():
-        db_path = f"../data/{dataset_name}.sqlite"
+        db_path = f"{data_dir}/{dataset_name}.sqlite"
         assert not os.path.exists(db_path), f"Output file already exists: {db_path}"
 
     # Executes the ETL pipeline
@@ -106,7 +111,7 @@ def test_etl_pipeline_execution():
 
     # Check that each expected output file exists after pipeline execution
     for dataset_name in datasets.keys():
-        db_path = f"../data/{dataset_name}.sqlite"
+        db_path = f"{data_dir}/{dataset_name}.sqlite"
         assert os.path.isfile(db_path), f"Expected output file not found: {db_path}"
         os.remove(db_path)
 
