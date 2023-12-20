@@ -27,3 +27,6 @@ jobs:
           chmod +x ./project/tests.sh
           ./project/tests.sh
 
+      - name: Success Message
+        run: echo "All tests ran successfully!"
+
