@@ -1,0 +1,28 @@
+name: GitHub Actions for testing the workflow
+run-name: ${{ github.actor }} is testing the workflow
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event." 
+
+      #Checkout the branch
+      - name: Checkout
+        uses: actions/checkout@v3 
+      
+      # Build Stage 
+      - name: pip install requirements
+        run: |
+            pip install -r requirements.txt 
+
+      # Test Stage
+      - name: Run Tests
+        run: | 
+          chmod +x ./project/tests.sh
+          ./project/tests.sh
