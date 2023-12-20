@@ -8,7 +8,6 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
 
-    
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event." 
 
@@ -26,7 +25,4 @@ jobs:
         run: |
           chmod +x ./project/tests.sh
           ./project/tests.sh
-
-      - name: Success Message
-        run: echo "All tests ran successfully!"
-
+          echo "All tests ran successfully!"
