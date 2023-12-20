@@ -20,7 +20,7 @@ def extract_data(url):
 
 # Function to apply specific transformations to the 'Airports in Germany' dataset
 def transform_airports_germany(data):
-    transformed = data.iloc[1:].copy()
+    transformed = data.copy() 
     transformed['latitude_deg'] = pd.to_numeric(transformed['latitude_deg'], errors='coerce')
     transformed['longitude_deg'] = pd.to_numeric(transformed['longitude_deg'], errors='coerce')
     transformed['name'] = transformed['name'].str.strip()
