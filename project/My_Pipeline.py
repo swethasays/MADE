@@ -50,6 +50,8 @@ def transform_airplanes(data):
 
 def transform_global_airports(data):
     transformed = data.copy()
+    if 'Type' in transformed.columns:
+        transformed['Type'] = transformed['Type'].str.strip()
     transformed['Name'] = transformed['Name'].str.strip()
     transformed['City'] = transformed['City'].str.strip()
     transformed['Country'] = transformed['Country'].str.strip()
