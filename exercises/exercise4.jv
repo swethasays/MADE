@@ -27,29 +27,13 @@ pipeline TemperatureDataPipeline {
             "Hersteller" oftype text,
             "Model" oftype text,
             "Monat" oftype MonatValue,
-            "Temperatur in °C (DWD)" oftype decimal,
-            "Batterietemperatur in °C" oftype decimal,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
             "Geraet aktiv" oftype text
         ];
     }
 
 
-
-    transform RenameTransform {
-        from OldName oftype text;
-        to NewName oftype text;
-        NewName: OldName;
-    }
-    block RenameTemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
-        outputColumn: 'Temperatur';
-        use: RenameTransform;
-    }
-    block RenameBatterietemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
-        outputColumn: 'Batterietemperatur';
-        use: RenameTransform;
-    }
     block UnwantedColumnsDeleter oftype ColumnDeleter {
         delete: [column L, column M, column N, column O]; 
     }
@@ -109,8 +93,6 @@ pipeline TemperatureDataPipeline {
         -> DataCsvTextFileInterpreter 
         -> CsvFileInterpreter 
         -> DataTableInterpreter 
-        -> RenameTemperaturColumnTransformer 
-        -> RenameBatterietemperaturColumnTransformer
         -> TemperaturCelsiusToFahrenheitTransformer 
         -> BatterietemperaturCelsiusToFahrenheitTransformer 
         -> LoadIntoSQLite;
