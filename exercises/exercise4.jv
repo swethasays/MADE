@@ -17,16 +17,15 @@ pipeline TemperatureDataPipeline {
         delimiter: ";";
     }
 
-    block ColDataSelector oftype CellRangeSelector {select: range A1:K*;}
 
 
     block DataTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "Geraet" oftype GeraetId,
+            "Geraet" oftype integer,
             "Hersteller" oftype text,
             "Model" oftype text,
-            "Monat" oftype MonatValue,
+            "Monat" oftype integer,
             "Temperatur in °C (DWD)" oftype decimal,
             "Batterietemperatur in °C" oftype decimal,
             "Geraet aktiv" oftype text
@@ -79,25 +78,6 @@ pipeline TemperatureDataPipeline {
 
 
 
-    valuetype GeraetId oftype integer {
-        constraints: [
-            GeraetIdConstraint,
-        ];
-    }
-
-    constraint GeraetIdConstraint on integer:
-        value > 0;
-
-
-    valuetype MonatValue oftype integer {
-        constraints: [
-            MonatConstraint,
-        ];
-    }
-
-    constraint MonatConstraint on integer:
-        value >= 1 and value <= 12;
-
 
 
     block LoadIntoSQLite oftype SQLiteLoader {
@@ -111,7 +91,6 @@ pipeline TemperatureDataPipeline {
         -> DataCsvFilePicker 
         -> DataCsvTextFileInterpreter 
         -> CsvFileInterpreter 
-        -> ColDataSelector
         -> DataTableInterpreter 
         -> TemperaturCelsiusToFahrenheitTransformer 
         -> BatterietemperaturCelsiusToFahrenheitTransformer 
