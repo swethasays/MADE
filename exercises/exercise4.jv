@@ -34,8 +34,6 @@ pipeline TemperatureDataPipeline {
 
 
 
-
-
     transform RenameTransform {
         from OldName oftype text;
         to NewName oftype text;
@@ -52,9 +50,8 @@ pipeline TemperatureDataPipeline {
         use: RenameTransform;
     }
     block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column F, column G, column H, column I]; 
+        delete: [column L, column M, column N, column O]; 
     }
-
 
 
 
@@ -96,7 +93,6 @@ pipeline TemperatureDataPipeline {
 
     constraint MonatConstraint on integer:
         value >= 1 and value <= 12;
-
 
 
 
