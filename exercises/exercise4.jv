@@ -109,6 +109,8 @@ pipeline TemperatureDataPipeline {
         -> DataCsvTextFileInterpreter 
         -> CsvFileInterpreter 
         -> DataTableInterpreter 
+        -> RenameTemperaturColumnTransformer 
+        -> RenameBatterietemperaturColumnTransformer
         -> TemperaturCelsiusToFahrenheitTransformer 
         -> BatterietemperaturCelsiusToFahrenheitTransformer 
         -> LoadIntoSQLite;
