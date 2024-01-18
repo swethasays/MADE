@@ -1,4 +1,3 @@
-
 pipeline TemperatureDataPipeline {
 
     block DataZipExtractor oftype HttpExtractor {
@@ -13,45 +12,27 @@ pipeline TemperatureDataPipeline {
         path: "/data.csv";
     }
 
-    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
     block CsvFileInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
 
+    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
+
     block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column H, column I, column J, column K]; 
+        delete: [column F, column G, column H, column I]; 
     }
 
-
     block DataTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: false;
         columns: [
             "Geraet" oftype GeraetId,
             "Hersteller" oftype text,
             "Model" oftype text,
             "Monat" oftype MonatValue,
-            "Temperatur in °C (DWD)" oftype decimal,
-            "Batterietemperatur in °C" oftype decimal,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
             "Geraet aktiv" oftype text
         ];
-    }
-
-
-
-    transform RenameTransform {
-        from OldName oftype text;
-        to NewName oftype text;
-        NewName: OldName;
-    }
-    block RenameTemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
-        outputColumn: 'Temperatur';
-        use: RenameTransform;
-    }
-    block RenameBatterietemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
-        outputColumn: 'Batterietemperatur';
-        use: RenameTransform;
     }
 
 
@@ -63,13 +44,13 @@ pipeline TemperatureDataPipeline {
     }
 
     block TemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
+        inputColumns: ['Temperatur'];
         outputColumn: 'Temperatur';
         use: CelsiusToFahrenheit;
     }
 
     block BatterietemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
+        inputColumns: ['Batterietemperatur'];
         outputColumn: 'Batterietemperatur';
         use: CelsiusToFahrenheit;
     }
@@ -77,9 +58,7 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype GeraetId oftype integer {
-        constraints: [
-            GeraetIdConstraint,
-        ];
+        constraints: [GeraetIdConstraint];
     }
 
     constraint GeraetIdConstraint on integer:
@@ -87,9 +66,7 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype MonatValue oftype integer {
-        constraints: [
-            MonatConstraint,
-        ];
+        constraints: [MonatConstraint];
     }
 
     constraint MonatConstraint on integer:
@@ -108,6 +85,7 @@ pipeline TemperatureDataPipeline {
         -> DataCsvFilePicker 
         -> DataCsvTextFileInterpreter 
         -> CsvFileInterpreter 
+        -> UnwantedColumnsDeleter
         -> DataTableInterpreter 
         -> TemperaturCelsiusToFahrenheitTransformer 
         -> BatterietemperaturCelsiusToFahrenheitTransformer 
