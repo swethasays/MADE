@@ -12,11 +12,12 @@ pipeline TemperatureDataPipeline {
         path: "/data.csv";
     }
 
+    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
+
     block CsvFileInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
 
-    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
 
     block UnwantedColumnsDeleter oftype ColumnDeleter {
         delete: [column F, column G, column H, column I]; 
