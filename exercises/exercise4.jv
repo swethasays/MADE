@@ -17,8 +17,11 @@ pipeline TemperatureDataPipeline {
         delimiter: ";";
     }
 
+    block ColDataSelector oftype CellRangeSelector {select: range A1:K*;}
+
+
     block DataTableInterpreter oftype TableInterpreter {
-        header: false;
+        header: true;
         columns: [
             "Geraet" oftype GeraetId,
             "Hersteller" oftype text,
