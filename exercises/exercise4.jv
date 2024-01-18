@@ -1,114 +1,56 @@
 pipeline TemperatureDataPipeline {
 
+    // Extraction and Unzipping
     block DataZipExtractor oftype HttpExtractor {
         url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
     }
+    block ZipArchiveInterpreter oftype ArchiveInterpreter { archiveType: "zip"; }
+    block DataCsvFilePicker oftype FilePicker { path: "/data.csv"; }
 
-    block ZipArchiveInterpreter oftype ArchiveInterpreter {
-        archiveType: "zip";
-    }
-
-    block DataCsvFilePicker oftype FilePicker {
-        path: "/data.csv";
-    }
-
+    // CSV Interpretation
     block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
-    block CsvFileInterpreter oftype CSVInterpreter {
-        delimiter: ";";
-    }
+    block CsvFileInterpreter oftype CSVInterpreter { delimiter: ";"; }
 
-
-
+    // Define Table Interpreter with accurate columns
     block DataTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "Geraet" oftype GeraetId,
+            "Geraet" oftype integer,
             "Hersteller" oftype text,
             "Model" oftype text,
-            "Monat" oftype MonatValue,
+            "Monat" oftype integer,
             "Temperatur in °C (DWD)" oftype decimal,
             "Batterietemperatur in °C" oftype decimal,
             "Geraet aktiv" oftype text
         ];
     }
 
-
-
-    transform RenameTransform {
-        from OldName oftype text;
-        to NewName oftype text;
-        NewName: OldName;
-    }
+    // Rename Columns
+    transform RenameTransform { from OldName oftype text; to NewName oftype text; NewName: OldName; }
     block RenameTemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
-        outputColumn: 'Temperatur';
-        use: RenameTransform;
+        inputColumns: ['Temperatur in °C (DWD)']; outputColumn: 'Temperatur'; use: RenameTransform;
     }
     block RenameBatterietemperaturColumnTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
-        outputColumn: 'Batterietemperatur';
-        use: RenameTransform;
-    }
-    block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column L, column M, column N, column O]; 
+        inputColumns: ['Batterietemperatur in °C']; outputColumn: 'Batterietemperatur'; use: RenameTransform;
     }
 
-
-
-    transform CelsiusToFahrenheit {
-        from Celsius oftype decimal;
-        to Fahrenheit oftype decimal;
-        Fahrenheit: (Celsius * 9/5) + 32;
-    }
-
+    // Transform Temperatures
+    transform CelsiusToFahrenheit { from Celsius oftype decimal; to Fahrenheit oftype decimal; Fahrenheit: (Celsius * 9/5) + 32; }
     block TemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
-        outputColumn: 'Temperatur';
-        use: CelsiusToFahrenheit;
+        inputColumns: ['Temperatur']; outputColumn: 'Temperatur'; use: CelsiusToFahrenheit;
     }
-
     block BatterietemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
-        outputColumn: 'Batterietemperatur';
-        use: CelsiusToFahrenheit;
+        inputColumns: ['Batterietemperatur']; outputColumn: 'Batterietemperatur'; use: CelsiusToFahrenheit;
     }
 
+    // Delete Unwanted Columns
+    block UnwantedColumnsDeleter oftype ColumnDeleter { delete: [column L, column M, column N, column O]; }
 
+    // Load into SQLite
+    block LoadIntoSQLite oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
 
-    valuetype GeraetId oftype integer {
-        constraints: [
-            GeraetIdConstraint,
-        ];
-    }
-
-    constraint GeraetIdConstraint on integer:
-        value > 0;
-
-
-    valuetype MonatValue oftype integer {
-        constraints: [
-            MonatConstraint,
-        ];
-    }
-
-    constraint MonatConstraint on integer:
-        value >= 1 and value <= 12;
-
-
-
-    block LoadIntoSQLite oftype SQLiteLoader {
-        table: "temperatures";
-        file: "./temperatures.sqlite";
-    }
-
-
-    DataZipExtractor 
-        -> ZipArchiveInterpreter 
-        -> DataCsvFilePicker 
-        -> DataCsvTextFileInterpreter 
-        -> CsvFileInterpreter 
-        -> DataTableInterpreter 
-        -> TemperaturCelsiusToFahrenheitTransformer 
-        -> BatterietemperaturCelsiusToFahrenheitTransformer 
-        -> LoadIntoSQLite;
+    // Define Pipeline Flow
+    DataZipExtractor -> ZipArchiveInterpreter -> DataCsvFilePicker -> DataCsvTextFileInterpreter -> CsvFileInterpreter -> DataTableInterpreter -> RenameTemperaturColumnTransformer -> RenameBatterietemperaturColumnTransformer -> TemperaturCelsiusToFahrenheitTransformer -> BatterietemperaturCelsiusToFahrenheitTransformer -> UnwantedColumnsDeleter -> LoadIntoSQLite;
 }
+
+
