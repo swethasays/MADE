@@ -12,16 +12,14 @@ pipeline TemperatureDataPipeline {
         path: "/data.csv";
     }
 
-
-    block CsvInterpreter oftype CSVInterpreter {
+    block CsvFileInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
 
-
-    block DataCsvTextInterpreter oftype TextFileInterpreter { }
+    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
 
     block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column F, column G, column H, column I]; 
+        delete: [column H, column I, column J, column K]; 
     }
 
     block DataTableInterpreter oftype TableInterpreter {
@@ -85,10 +83,10 @@ pipeline TemperatureDataPipeline {
     DataZipExtractor 
         -> ZipArchiveInterpreter 
         -> DataCsvFilePicker 
-        -> DataCsvTextInterpreter 
-        -> CsvInterpreter
-        -> DataTableInterpreter 
+        -> DataCsvTextFileInterpreter 
+        -> CsvFileInterpreter 
         -> UnwantedColumnsDeleter
+        -> DataTableInterpreter 
         -> TemperaturCelsiusToFahrenheitTransformer 
         -> BatterietemperaturCelsiusToFahrenheitTransformer 
         -> LoadIntoSQLite;
