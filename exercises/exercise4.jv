@@ -24,8 +24,8 @@ pipeline TemperatureDataPipeline {
             "Hersteller" oftype text,
             "Model" oftype text,
             "Monat" oftype MonatValue,
-            "Temperatur in °C (DWD)" oftype decimal,
-            "Batterietemperatur in °C" oftype decimal,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
             "Geraet aktiv" oftype text
         ];
     }
