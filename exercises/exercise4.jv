@@ -22,10 +22,10 @@ pipeline TemperatureDataPipeline {
     block DataTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "Geraet" oftype integer,
+            "Geraet" oftype GeraetId,
             "Hersteller" oftype text,
             "Model" oftype text,
-            "Monat" oftype integer,
+            "Monat" oftype MonatValue,
             "Temperatur in °C (DWD)" oftype decimal,
             "Batterietemperatur in °C" oftype decimal,
             "Geraet aktiv" oftype text
@@ -52,7 +52,7 @@ pipeline TemperatureDataPipeline {
         use: RenameTransform;
     }
     block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column L, column M, column N, column O]; 
+        delete: [column F, column G, column H, column I]; 
     }
 
 
@@ -76,6 +76,26 @@ pipeline TemperatureDataPipeline {
         use: CelsiusToFahrenheit;
     }
 
+
+
+    valuetype GeraetId oftype integer {
+        constraints: [
+            GeraetIdConstraint,
+        ];
+    }
+
+    constraint GeraetIdConstraint on integer:
+        value > 0;
+
+
+    valuetype MonatValue oftype integer {
+        constraints: [
+            MonatConstraint,
+        ];
+    }
+
+    constraint MonatConstraint on integer:
+        value >= 1 and value <= 12;
 
 
 
