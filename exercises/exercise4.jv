@@ -12,11 +12,13 @@ pipeline TemperatureDataPipeline {
         path: "/data.csv";
     }
 
-    block DataCsvTextInterpreter oftype TextFileInterpreter { }
 
     block CsvInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
+
+
+    block DataCsvTextInterpreter oftype TextFileInterpreter { }
 
 
     block DataTableInterpreter oftype TableInterpreter {
