@@ -18,7 +18,7 @@ pipeline TemperatureDataPipeline {
     }
 
     block DataTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: false;
         columns: [
             "Geraet" oftype GeraetId,
             "Hersteller" oftype text,
