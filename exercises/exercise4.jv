@@ -12,11 +12,15 @@ pipeline TemperatureDataPipeline {
         path: "/data.csv";
     }
 
-    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
     block CsvFileInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
 
+    block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
+
+    block UnwantedColumnsDeleter oftype ColumnDeleter {
+        delete: [column L, column M, column N, column O]; 
+    }
 
 
     block DataTableInterpreter oftype TableInterpreter {
@@ -26,8 +30,8 @@ pipeline TemperatureDataPipeline {
             "Hersteller" oftype text,
             "Model" oftype text,
             "Monat" oftype MonatValue,
-            "Temperatur" oftype decimal,
-            "Batterietemperatur" oftype decimal,
+            "Temperatur in °C (DWD)" oftype decimal,
+            "Batterietemperatur in °C" oftype decimal,
             "Geraet aktiv" oftype text
         ];
     }
@@ -48,11 +52,6 @@ pipeline TemperatureDataPipeline {
         inputColumns: ['Batterietemperatur in °C'];
         outputColumn: 'Batterietemperatur';
         use: RenameTransform;
-    }
-
-
-    block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column L, column M, column N, column O]; 
     }
 
 
@@ -78,7 +77,9 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype GeraetId oftype integer {
-        constraints: [GeraetIdConstraint];
+        constraints: [
+            GeraetIdConstraint,
+        ];
     }
 
     constraint GeraetIdConstraint on integer:
@@ -86,7 +87,9 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype MonatValue oftype integer {
-        constraints: [MonatConstraint];
+        constraints: [
+            MonatConstraint,
+        ];
     }
 
     constraint MonatConstraint on integer:
