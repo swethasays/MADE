@@ -78,9 +78,7 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype GeraetId oftype integer {
-        constraints: [
-            GeraetIdConstraint,
-        ];
+        constraints: [GeraetIdConstraint];
     }
 
     constraint GeraetIdConstraint on integer:
@@ -88,9 +86,7 @@ pipeline TemperatureDataPipeline {
 
 
     valuetype MonatValue oftype integer {
-        constraints: [
-            MonatConstraint,
-        ];
+        constraints: [MonatConstraint];
     }
 
     constraint MonatConstraint on integer:
