@@ -18,7 +18,6 @@ pipeline TemperatureDataPipeline {
         delimiter: ";";
     }
 
-
     block UnwantedColumnsDeleter oftype ColumnDeleter {
         delete: [column F, column G, column H, column I]; 
     }
