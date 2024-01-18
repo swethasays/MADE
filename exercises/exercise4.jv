@@ -47,13 +47,13 @@ pipeline TemperatureDataPipeline {
     }
 
     block TemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Temperatur in °C (DWD)'];
+        inputColumns: ['Temperatur'];
         outputColumn: 'Temperatur';
         use: CelsiusToFahrenheit;
     }
 
     block BatterietemperaturCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumns: ['Batterietemperatur in °C'];
+        inputColumns: ['Batterietemperatur'];
         outputColumn: 'Batterietemperatur';
         use: CelsiusToFahrenheit;
     }
