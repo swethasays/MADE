@@ -19,7 +19,7 @@ pipeline TemperatureDataPipeline {
     block DataCsvTextFileInterpreter oftype TextFileInterpreter { }
 
     block UnwantedColumnsDeleter oftype ColumnDeleter {
-        delete: [column H, column I, column J, column K]; 
+        delete: [column F, column G, column H, column I]; 
     }
 
     block DataTableInterpreter oftype TableInterpreter {
