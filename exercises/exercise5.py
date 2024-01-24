@@ -51,7 +51,7 @@ def load_and_process_data(file_name):
 def write_to_sqlite(df, db_name='gtfs.sqlite', table_name='stops'):
     conn = sqlite3.connect(db_name)
     df.to_sql(table_name, conn, if_exists='replace', index=False, dtype={
-        'stop_id': 'TEXT',
+        'stop_id': 'INTEGER',
         'stop_name': 'TEXT',
         'stop_lat': 'FLOAT',
         'stop_lon': 'FLOAT',
