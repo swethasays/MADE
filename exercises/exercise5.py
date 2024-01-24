@@ -34,14 +34,14 @@ def validate_coordinates(lat, lon):
         return False
 
 
-
 def load_and_process_data(file_name):
     columns_to_load = ['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id']
 
     df = pd.read_csv(file_name, usecols=columns_to_load)
-    df_filtered = df[df['zone_id'] == 2001]
 
-    # Validate and drop rows with invalid data
+    df.dropna(subset=['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id'], inplace=True)
+
+    df_filtered = df[df['zone_id'] == 2001]
     df_filtered = df_filtered[df_filtered['stop_name'].apply(validate_stop_name)]
     df_filtered = df_filtered[df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
 
