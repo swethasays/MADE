@@ -35,15 +35,16 @@ def validate_coordinates(lat, lon):
 
 
 def load_and_process_data(file_name):
-    columns_to_load = ['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id']
+ 
+    df = pd.read_csv(file_name, usecols=['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id'])
 
-    df = pd.read_csv(file_name, usecols=columns_to_load)
+
     df_filtered = df[df['zone_id'] == 2001]
 
-    # Validate and drop rows with invalid data
-    df_val = df_filtered[df_filtered['stop_name'].apply(validate_stop_name)] & df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
+    df_validated = df_filtered[df_filtered['stop_name'].apply(validate_stop_name) &
+                               df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
 
-    return df_val
+    return df_validated
 
 
 def write_to_sqlite(df, db_name='gtfs.sqlite', table_name='stops'):
