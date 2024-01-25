@@ -15,36 +15,20 @@ def validate_stop_name(name):
     return any(umlaut in name for umlaut in umlauts)
 
 def validate_coordinates(lat, lon):
-    global lat_valid, lon_valid
-    if lat >= -90 and lat <= 90:
-        lat_valid = True
-    else:
-        is_lat_valid = False
-
-  
-    if lon >= -90 and lon <= 90:
-        lon_valid = True
-    else:
-        is_lon_valid = False
-
-
-    if lat_valid and lon_valid:
-        return True
-    else:
-        return False
+    return -90 <= lat <= 90 and -90 <= lon <= 90
 
 
 def load_and_process_data(file_name):
- 
-    df = pd.read_csv(file_name, usecols=['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id'])
+    columns_to_load = ['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id']
 
-
+    df = pd.read_csv(file_name, usecols=columns_to_load)
     df_filtered = df[df['zone_id'] == 2001]
 
-    df_validated = df_filtered[df_filtered['stop_name'].apply(validate_stop_name) &
-                               df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
+    # Validate and drop rows with invalid data
+    df_filtered = df_filtered[df_filtered['stop_name'].apply(validate_stop_name)]
+    df_filtered = df_filtered[df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
 
-    return df_validated
+    return df_filtered
 
 
 def write_to_sqlite(df, db_name='gtfs.sqlite', table_name='stops'):
