@@ -25,7 +25,6 @@ def load_and_process_data(file_name):
     df_filtered = df[df['zone_id'] == 2001]
 
     # Validate and drop rows with invalid data
-    df_filtered = df_filtered[df_filtered['stop_name'].apply(validate_stop_name)]
     df_filtered = df_filtered[df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
 
     return df_filtered
