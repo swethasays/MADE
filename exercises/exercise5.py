@@ -17,25 +17,23 @@ def validate_stop_name(name):
     umlauts = ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß']
     return any(umlaut in name for umlaut in umlauts)
 
-def validate_coordinates(lat, lon):
-    lat_validate = -90 <= lat <= 90
-    long_validate = -90 <= lon <= 90
-    return lat_validate and long_validate
-
 
 def load_and_process_data(file_name):
     columns_to_load = ['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id']
-
     df = pd.read_csv(file_name, usecols=columns_to_load)
-    df_filtered = df[df['zone_id'] == 2001]
 
+    # Validate
+    df_filtered = df[df['zone_id'] == 2001]
     
     #df_filtered = df_filtered['stop_name'].apply(validate_stop_name)
     
-    # Validate and drop rows with invalid data
-    df_filtered = df_filtered[df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
+    df_valid_coordinates = df_filtered[
+        (df_filtered['stop_lat'] >= -90) & (df_filtered['stop_lat'] <= 90) & 
+        (df_filtered['stop_lon'] >= -90) & (df_filtered['stop_lon'] <= 90)
+    ]
 
-    return df_filtered
+    return df_valid_coordinates
+
 
 def write_to_sqlite(df, db_name='gtfs.sqlite', table_name='stops'):
     try:
