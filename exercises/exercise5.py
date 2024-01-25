@@ -15,7 +15,9 @@ def validate_stop_name(name):
     return any(umlaut in name for umlaut in umlauts)
 
 def validate_coordinates(lat, lon):
-    return -90 <= lat <= 90 and -90 <= lon <= 90
+    lat_validate = -90 <= lat <= 90
+    long_validate = -90 <= lon <= 90
+    return lat_validate and long_validate
 
 
 def load_and_process_data(file_name):
@@ -24,6 +26,9 @@ def load_and_process_data(file_name):
     df = pd.read_csv(file_name, usecols=columns_to_load)
     df_filtered = df[df['zone_id'] == 2001]
 
+    
+    df_filtered['has_umlauts'] = df_filtered['stop_name'].apply(validate_stop_name)
+    
     # Validate and drop rows with invalid data
     df_filtered = df_filtered[df_filtered.apply(lambda x: validate_coordinates(x['stop_lat'], x['stop_lon']), axis=1)]
 
@@ -37,7 +42,10 @@ def write_to_sqlite(df, db_name='gtfs.sqlite', table_name='stops'):
         'stop_name': 'TEXT',
         'stop_lat': 'FLOAT',
         'stop_lon': 'FLOAT',
-        'zone_id': 'INTEGER'
+        'zone_id': 'INTEGER',
+        'has_umlaut': 'TEXT'
+
+
     })
     conn.close()
 
